@@ -13,6 +13,9 @@ import { Profile } from './Profile';
 
 @Entity({ name: 'users' })
 export class User {
+  comparePassword(password: string) {
+    throw new Error('Method not implemented.');
+  }
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 

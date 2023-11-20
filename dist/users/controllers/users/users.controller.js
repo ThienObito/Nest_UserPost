@@ -19,6 +19,8 @@ const CreateUserPost_dto_1 = require("../../dtos/CreateUserPost.dto");
 const CreateUserProfile_dto_1 = require("../../dtos/CreateUserProfile.dto");
 const UpdateUser_dto_1 = require("../../dtos/UpdateUser.dto");
 const users_service_1 = require("../../services/users/users.service");
+const bcrypt = require("bcrypt");
+const Login_dto_1 = require("../../dtos/Login.dto");
 let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
@@ -26,8 +28,23 @@ let UsersController = class UsersController {
     getUsers() {
         return this.userService.findUsers();
     }
-    createUser(createUserDto) {
-        return this.userService.createUser(createUserDto);
+    async register(createUserDto) {
+        const { username, password } = createUserDto;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        createUserDto.password = hashedPassword;
+        const user = this.userService.createUser(createUserDto);
+        return user;
+    }
+    async login(loginDto) {
+        const { username, password } = loginDto;
+        try {
+            const user = await this.authService.validateUser(username, password);
+            const token = await this.authService.login(user);
+            return Object.assign({ user }, token);
+        }
+        catch (error) {
+            throw new common_1.UnauthorizedException('Thông tin không hợp lệ');
+        }
     }
     async updateUserById(id, updateUserDto) {
         await this.userService.updateUser(id, updateUserDto);
@@ -53,8 +70,15 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [CreateUser_dto_1.CreateUserDto]),
-    __metadata("design:returntype", void 0)
-], UsersController.prototype, "createUser", null);
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "register", null);
+__decorate([
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Login_dto_1.LoginDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "login", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

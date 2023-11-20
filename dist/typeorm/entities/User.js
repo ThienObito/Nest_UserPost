@@ -14,6 +14,9 @@ const typeorm_1 = require("typeorm");
 const Post_1 = require("./Post");
 const Profile_1 = require("./Profile");
 let User = class User {
+    comparePassword(password) {
+        throw new Error('Method not implemented.');
+    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)({ type: 'bigint' }),

@@ -15,6 +15,7 @@ const Post_1 = require("./typeorm/entities/Post");
 const Profile_1 = require("./typeorm/entities/Profile");
 const User_1 = require("./typeorm/entities/User");
 const users_module_1 = require("./users/users.module");
+const Login_dto_1 = require("./users/dtos/Login.dto");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -27,7 +28,7 @@ AppModule = __decorate([
                 username: 'root',
                 password: '123456',
                 database: 'database_tobi',
-                entities: [User_1.User, Profile_1.Profile, Post_1.Post],
+                entities: [User_1.User, Profile_1.Profile, Post_1.Post, Login_dto_1.LoginDto],
                 synchronize: true,
             }),
             users_module_1.UsersModule,
