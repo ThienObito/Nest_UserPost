@@ -11,30 +11,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("../../services/auth/auth.service");
+const login_dto_1 = require("src/auth/login.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    async login(username, password) {
+    async login(loginDto) {
+        const { username, password } = loginDto;
         try {
-            const token = await this.authService.login(username, password);
-            return { access_token: token };
+            const user = await this.authService.validateUser(username, password);
+            const token = await this.authService.login(user);
+            return Object.assign({ user }, token);
         }
         catch (error) {
-            throw new common_1.HttpException(error.message, common_1.HttpStatus.UNAUTHORIZED);
+            throw new common_1.UnauthorizedException('Invalid credentials');
         }
     }
 };
 __decorate([
     (0, common_1.Post)('login'),
-    __param(0, (0, common_1.Body)('username')),
-    __param(1, (0, common_1.Body)('password')),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [typeof (_a = typeof login_dto_1.LoginDto !== "undefined" && login_dto_1.LoginDto) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 AuthController = __decorate([

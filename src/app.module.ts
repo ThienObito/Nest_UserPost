@@ -6,6 +6,7 @@ import { Post } from './typeorm/entities/Post';
 import { Profile } from './typeorm/entities/Profile';
 import { User } from './typeorm/entities/User';
 import { UsersModule } from './users/users.module';
+import { LoginDto } from './users/dtos/Login.dto';
 
 @Module({
   imports: [
@@ -16,10 +17,10 @@ import { UsersModule } from './users/users.module';
       username: 'root',
       password: '123456',
       database: 'database_tobi',
-      entities: [User, Profile, Post],
+      entities: [User, Profile, Post,LoginDto],
       synchronize: true,
     }),
-    UsersModule  ,
+    UsersModule ,
   ],
   controllers: [AppController],
   providers: [AppService],
