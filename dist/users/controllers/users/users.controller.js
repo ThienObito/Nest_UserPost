@@ -16,65 +16,94 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const CreateUser_dto_1 = require("../../dtos/CreateUser.dto");
 const users_service_1 = require("../../services/users/users.service");
-const bcrypt = require("bcrypt");
 const Login_dto_1 = require("../../dtos/Login.dto");
 const jwt = require("jsonwebtoken");
-const jwt_auth_guard_1 = require("../../../typeorm/entities/jwt.auth.guard");
 const UpdateProfileDto_1 = require("../../dtos/UpdateProfileDto");
 let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
     }
-    async updateProfile(updateProfileDto, req) {
-        const userIdFromToken = req.user.id;
-        if (userIdFromToken !== updateProfileDto.id) {
-            return { message: 'Unauthorized update attempt' };
+    async updateProfile(updateProfileDto, req, headers) {
+        try {
+            console.log('Bắt đầu quá trình cập nhật user...');
+            const token = headers.authorization.replace('Bearer ', '');
+            const decodedToken = jwt.verify(token, 'your-secret-key');
+            if (!decodedToken ||
+                typeof decodedToken !== 'object' ||
+                !('userId' in decodedToken) ||
+                !('username' in decodedToken)) {
+                throw new Error('Invalid token format');
+            }
+            const userId = decodedToken.userId;
+            const username = decodedToken.username;
+            console.log('Đã lấy được id và tên của user', userId, username);
+            const updatedUser = await this.authenticateAndUpdate(userId, username, updateProfileDto);
+            console.log('Thông tin đã được cập nhật:', updatedUser);
+            return { message: 'cập nhật người dùng', user: updatedUser };
         }
-        return this.userService.updateUserProfile(userIdFromToken, updateProfileDto);
+        catch (error) {
+            console.error('token ivalid', error);
+            return { message: 'token ivalid' };
+        }
+    }
+    async authenticateAndUpdate(userId, username, updateProfileDto) {
+        try {
+            const authenticatedUser = await this.userService.authenticateUser(userId, username);
+            if (!authenticatedUser) {
+                throw new common_1.UnauthorizedException('lỗi user auth');
+            }
+            authenticatedUser.address = updateProfileDto.address;
+            authenticatedUser.dob = new Date(updateProfileDto.dob);
+            authenticatedUser.sex = updateProfileDto.sex;
+            console.log('add thành công nha em iu');
+            return await this.userService.updateUser(authenticatedUser);
+        }
+        catch (error) {
+            throw new Error('lỗi auth và cập nhật user');
+        }
     }
     getUsers() {
         return this.userService.findUsers();
     }
     async register(createUserDto) {
-        const { fullname, phone, password } = createUserDto;
-        console.log("Bắt đầu quá trình đăng kí tài khoản...");
-        const hashedPassword = await bcrypt.hash(password, 10);
-        console.log("Đang băm mật khẩu...");
-        createUserDto.password = hashedPassword;
-        console.log("Tạo tài khoản thành công và lưu vào SQL...");
+        console.log('Bắt đầu quá trình đăng kí tài khoản...');
+        console.log('Tạo tài khoản thành công và lưu vào SQL...');
         const user = this.userService.createUser(createUserDto);
         return user;
     }
     async login(loginDto) {
-        const { username, password } = loginDto;
         try {
-            console.log("Bắt đầu quá trình đăng nhập...");
-            const user = await this.userService.validateUser(username, password);
-            console.log("Đăng nhập thành công. Tạo token...");
+            const { phone, password } = loginDto;
+            console.log('Bắt đầu quá trình đăng nhập...');
+            const user = await this.userService.validateUser(phone, password);
+            console.log('heloooooo', phone, password);
+            if (!user) {
+                console.log('Đăng nhập không thành công. Người dùng không tồn tại hoặc mật khẩu không đúng.');
+                throw new common_1.UnauthorizedException('Thông tin không hợp lệ');
+            }
+            console.log('Đăng nhập thành công. Tạo token...');
             const token = {
-                accessToken: jwt.sign({ userId: user.id, username: user.fullname }, 'your-secret-key', {
-                    expiresIn: '1h',
-                }),
-                expiresAt: new Date(),
+                accessToken: jwt.sign({ userId: user.id, username: user.fullname }, 'your-secret-key', { expiresIn: '10m' }),
+                expiresAt: new Date(Date.now() + 10 * 60 * 1000),
             };
-            console.log("Token đã được tạo:", token);
+            console.log('Token đã được tạo:', token);
             return {
                 token,
             };
         }
         catch (error) {
-            console.error("Lỗi trong quá trình đăng nhập:", error);
+            console.error('Lỗi trong quá trình đăng nhập:', error);
             throw new common_1.UnauthorizedException('Thông tin không hợp lệ');
         }
     }
 };
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Put)(),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
+    __param(2, (0, common_1.Headers)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UpdateProfileDto_1.UpdateProfileDto, Object]),
+    __metadata("design:paramtypes", [UpdateProfileDto_1.UpdateProfileDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "updateProfile", null);
 __decorate([

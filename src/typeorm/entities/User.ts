@@ -24,7 +24,7 @@ export class User {
   @IsNotEmpty()
   password: string;
 
-  @Column()
+  @Column({unique : true})
   @IsNotEmpty()
   @IsPhoneNumber('VN')
   phone: string;

@@ -1,5 +1,5 @@
 export declare class UpdateProfileDto {
-    id: number;
+    phone: string;
     address: string;
     dob: Date;
     sex: boolean;

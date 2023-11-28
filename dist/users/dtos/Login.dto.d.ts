@@ -1,4 +1,4 @@
 export declare class LoginDto {
-    username: string;
+    phone: string;
     password: string;
 }

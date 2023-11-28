@@ -33,7 +33,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ unique: true }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsPhoneNumber)('VN'),
     __metadata("design:type", String)
