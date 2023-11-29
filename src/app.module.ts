@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { User } from './typeorm/entities/User';
 import { UsersModule } from './users/users.module';
 import { LoginDto } from './users/dtos/Login.dto';
+import { Product } from './typeorm/entities/Products';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { LoginDto } from './users/dtos/Login.dto';
       username: 'root',
       password: '123456',
       database: 'database_tobi',
-      entities: [User,LoginDto],
+      entities: [User,LoginDto,Product],
       synchronize: true,
     }),
     UsersModule ,

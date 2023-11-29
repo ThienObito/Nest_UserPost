@@ -8,5 +8,4 @@ export declare class User {
     dob: Date;
     sex: boolean;
     createdAt: Date;
-    authStrategy: string;
 }

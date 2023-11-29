@@ -1,10 +1,8 @@
-import { IsEmpty, IsNotEmpty, IsOptional, IsPhoneNumber } from 'class-validator';
-import { isEmpty } from 'rxjs';
+import {IsNotEmpty, IsOptional, IsPhoneNumber } from 'class-validator';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  Repository,
 } from 'typeorm';
 @Entity({ name: 'users' })
 export class User {
@@ -15,6 +13,7 @@ export class User {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   @IsOptional()
   id: number;
+  
 
   @Column({ unique: true })
   @IsNotEmpty()
@@ -29,7 +28,7 @@ export class User {
   @IsPhoneNumber('VN')
   phone: string;
 
-  @Column({default: 'N/A' })
+  @Column({default: 'A/V' })
   @IsOptional()
   address: string;
 
@@ -45,8 +44,5 @@ export class User {
   @IsOptional()
   createdAt: Date;
 
-  @Column({ nullable: true })
-  @IsOptional()
-  authStrategy: string;
 }
 
