@@ -16,12 +16,14 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
   @Get()
   async findAll(): Promise<Product[]> {
+     console.log("tìm kiếm tất cả sản phẩm")
     return this.productService.findAll();
   }
 
   @Post()
   async create(@Body() createProductDto: CreateProductDto): Promise<Product> {
-    return this.productService.create(createProductDto);
+     console.log("đã tạo một sản phẩm" )
+     return this.productService.create(createProductDto);
   }
 
   @Put(':id')
@@ -29,16 +31,19 @@ export class ProductController {
     @Param('id') id: number,
     @Body() updateProductDto: CreateProductDto,
   ): Promise<Product> {
+     console.log("cập nhật sản phẩm" ,id)
     return this.productService.update(id, updateProductDto);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<void> {
+     console.log("đã xóa sản phẩm" ,id)
     return this.productService.delete(id);
   }
 
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<Product> {
+     console.log("tìm kiếm sản phẩm theo id" ,id)
     return this.productService.findOne(id);
   }
 }

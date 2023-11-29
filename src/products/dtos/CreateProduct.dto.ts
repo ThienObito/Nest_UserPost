@@ -7,7 +7,6 @@ export class CreateProductDto {
      cost: number;
      price: number;
      color: string;
-     status: string;
      quantity: number;
      created_at: Date;
    }

@@ -21,18 +21,23 @@ let ProductController = class ProductController {
         this.productService = productService;
     }
     async findAll() {
+        console.log("tìm kiếm tất cả sản phẩm");
         return this.productService.findAll();
     }
     async create(createProductDto) {
+        console.log("đã tạo một sản phẩm");
         return this.productService.create(createProductDto);
     }
     async update(id, updateProductDto) {
+        console.log("cập nhật sản phẩm", id);
         return this.productService.update(id, updateProductDto);
     }
     async delete(id) {
+        console.log("đã xóa sản phẩm", id);
         return this.productService.delete(id);
     }
     async findOne(id) {
+        console.log("tìm kiếm sản phẩm theo id", id);
         return this.productService.findOne(id);
     }
 };

@@ -35,10 +35,6 @@ export class Product {
 
   @Column()
   @IsOptional()
-  status: string;
-
-  @Column()
-  @IsOptional()
   quantity: number;
 
   @Column()
