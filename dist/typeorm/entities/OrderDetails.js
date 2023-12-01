@@ -9,51 +9,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateOrderDetailDto = void 0;
-const class_validator_1 = require("class-validator");
+exports.OrderDetail = void 0;
 const typeorm_1 = require("typeorm");
-class CreateOrderDetailDto {
-}
+let OrderDetail = class OrderDetail {
+};
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
-    (0, typeorm_1.PrimaryGeneratedColumn)({ type: 'bigint' }),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], CreateOrderDetailDto.prototype, "order_id", void 0);
+], OrderDetail.prototype, "id", void 0);
 __decorate([
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], CreateOrderDetailDto.prototype, "product_detail_id", void 0);
+], OrderDetail.prototype, "order_detail_id", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], OrderDetail.prototype, "order_id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], OrderDetail.prototype, "id_product", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], CreateOrderDetailDto.prototype, "name", void 0);
+], OrderDetail.prototype, "name", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], CreateOrderDetailDto.prototype, "img", void 0);
+], OrderDetail.prototype, "img", void 0);
 __decorate([
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], CreateOrderDetailDto.prototype, "price", void 0);
+], OrderDetail.prototype, "price", void 0);
 __decorate([
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], CreateOrderDetailDto.prototype, "quantity", void 0);
+], OrderDetail.prototype, "quantity", void 0);
 __decorate([
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], CreateOrderDetailDto.prototype, "discount", void 0);
+], OrderDetail.prototype, "discount", void 0);
 __decorate([
-    (0, class_validator_1.IsDate)(),
-    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Date)
-], CreateOrderDetailDto.prototype, "create_date", void 0);
-exports.CreateOrderDetailDto = CreateOrderDetailDto;
+], OrderDetail.prototype, "create_date", void 0);
+OrderDetail = __decorate([
+    (0, typeorm_1.Entity)()
+], OrderDetail);
+exports.OrderDetail = OrderDetail;
 //# sourceMappingURL=OrderDetails.js.map

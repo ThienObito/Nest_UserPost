@@ -9,29 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateProductDetailDto = void 0;
+exports.ProductDetail = void 0;
 const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
-class CreateProductDetailDto {
+class ProductDetail {
 }
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     (0, typeorm_1.PrimaryGeneratedColumn)({ type: 'bigint' }),
     __metadata("design:type", String)
-], CreateProductDetailDto.prototype, "product_detail_id", void 0);
+], ProductDetail.prototype, "product_detail_id", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
-], CreateProductDetailDto.prototype, "id_product", void 0);
+], ProductDetail.prototype, "id_product", void 0);
 __decorate([
     (0, class_validator_1.IsInt)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
-], CreateProductDetailDto.prototype, "quantity", void 0);
+], ProductDetail.prototype, "quantity", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], CreateProductDetailDto.prototype, "size", void 0);
-exports.CreateProductDetailDto = CreateProductDetailDto;
+], ProductDetail.prototype, "size", void 0);
+exports.ProductDetail = ProductDetail;
 //# sourceMappingURL=ProductsDetails.js.map

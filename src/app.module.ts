@@ -6,6 +6,10 @@ import { User } from './typeorm/entities/User';
 import { UsersModule } from './users/users.module';
 import { LoginDto } from './users/dtos/Login.dto';
 import { Product } from './typeorm/entities/Products';
+import { Order } from './typeorm/entities/Orders';
+import { OrderDetail } from './typeorm/entities/OrderDetails';
+import { OrderDetailModule } from './order/services/orderdetail.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -16,10 +20,10 @@ import { Product } from './typeorm/entities/Products';
       username: 'root',
       password: '123456',
       database: 'database_tobi',
-      entities: [User,LoginDto,Product],
+      entities: [User,LoginDto,Product,Order,OrderDetail],
       synchronize: true,
     }),
-    UsersModule ,
+    UsersModule ,OrderDetailModule,OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

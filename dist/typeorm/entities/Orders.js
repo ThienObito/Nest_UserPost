@@ -9,71 +9,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateOrderDto = void 0;
-const class_validator_1 = require("class-validator");
+exports.Order = void 0;
 const typeorm_1 = require("typeorm");
-class CreateOrderDto {
-}
+let Order = class Order {
+};
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
-    (0, typeorm_1.PrimaryGeneratedColumn)({ type: 'bigint' }),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], CreateOrderDto.prototype, "order_id", void 0);
+], Order.prototype, "id", void 0);
 __decorate([
-    (0, class_validator_1.IsDate)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Order.prototype, "user_id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Order.prototype, "order_id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Order.prototype, "order_status", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Date)
-], CreateOrderDto.prototype, "order_date", void 0);
+], Order.prototype, "order_date", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "customer_note", void 0);
+], Order.prototype, "payment_method", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "order_status", void 0);
+], Order.prototype, "customer_note", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "payment_method", void 0);
+], Order.prototype, "customer_name", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "customer_name", void 0);
+], Order.prototype, "customer_phone", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "customer_phone", void 0);
+], Order.prototype, "customer_email", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "customer_email", void 0);
+], Order.prototype, "customer_address", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateOrderDto.prototype, "customer_address", void 0);
-__decorate([
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
-], CreateOrderDto.prototype, "shipping_money", void 0);
+], Order.prototype, "shipping_money", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "shipping_status", void 0);
+], Order.prototype, "shipping_status", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], CreateOrderDto.prototype, "payment_status", void 0);
-exports.CreateOrderDto = CreateOrderDto;
+], Order.prototype, "payment_status", void 0);
+Order = __decorate([
+    (0, typeorm_1.Entity)()
+], Order);
+exports.Order = Order;
 //# sourceMappingURL=Orders.js.map

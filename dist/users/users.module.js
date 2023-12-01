@@ -18,17 +18,21 @@ const users_controller_1 = require("./controllers/users/users.controller");
 const products_controller_1 = require("../products/controllers/products.controller");
 const products_service_1 = require("../products/service/products.service");
 const Products_1 = require("../typeorm/entities/Products");
+const order_service_1 = require("../order/services/order.service");
+const Orders_1 = require("../typeorm/entities/Orders");
+const order_controller_1 = require("../order/controllers/order.controller");
+const OrderDetails_1 = require("../typeorm/entities/OrderDetails");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([User_1.User, Products_1.Product]),
+        imports: [typeorm_1.TypeOrmModule.forFeature([User_1.User, Products_1.Product, Orders_1.Order, OrderDetails_1.OrderDetail]),
             passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
             jwt_1.JwtModule.register({
                 secret: 'your-secret-key',
             }),],
-        controllers: [users_controller_1.UsersController, products_controller_1.ProductController],
-        providers: [jwt_strategy_1.JwtStrategy, users_service_1.UsersService, products_service_1.ProductService],
+        controllers: [users_controller_1.UsersController, products_controller_1.ProductController, order_controller_1.OrderController],
+        providers: [jwt_strategy_1.JwtStrategy, users_service_1.UsersService, products_service_1.ProductService, order_service_1.OrderService],
     })
 ], UsersModule);
 exports.UsersModule = UsersModule;

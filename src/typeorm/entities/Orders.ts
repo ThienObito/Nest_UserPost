@@ -1,53 +1,48 @@
-import { IsInt, IsDate, IsString, IsOptional, IsNotEmpty } from 'class-validator';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
 
-export class CreateOrderDto {
-  @Column({ unique: true })
-  @PrimaryGeneratedColumn({ type: 'bigint' })
-  @IsOptional()
-  order_id: number;
+@Entity()
+export class Order {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @IsDate()
-  @IsOptional()
-  order_date: Date;
+  @Column()
+  user_id:number;
 
-  @IsString()
-  @IsOptional()
-  customer_note: string;
+  @Column()
+  order_id : number;
 
-  @IsString()
-  @IsOptional()
+  @Column()
   order_status: string;
 
-  @IsString()
-  @IsOptional()
+  @Column({ nullable: true })
+  order_date: Date;
+  
+  @Column()
   payment_method: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @Column({ nullable: true })
+  customer_note: string;
+
+  @Column()
   customer_name: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @Column()
   customer_phone: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @Column()
   customer_email: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @Column()
   customer_address: string;
 
-  @IsInt()
-  @IsOptional()
+  @Column({ nullable: true })
   shipping_money: number;
 
-  @IsString()
-  @IsOptional()
+  @Column({ nullable: true })
   shipping_status: string;
 
-  @IsString()
-  @IsOptional()
+  @Column({ nullable: true })
   payment_status: string;
+
+  
 }

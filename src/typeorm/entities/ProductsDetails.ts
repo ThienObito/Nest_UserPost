@@ -1,7 +1,7 @@
 import { IsInt, IsOptional, IsString } from 'class-validator';
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export class CreateProductDetailDto {
+export class ProductDetail{
   @Column({ unique: true })
   @PrimaryGeneratedColumn({ type: 'bigint' })
   product_detail_id: string;

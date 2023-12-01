@@ -1,37 +1,34 @@
-import { IsInt, IsDate, IsString, IsOptional } from 'class-validator';
-import { Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export class CreateOrderDetailDto {
-  @Column({ unique: true })
-  @PrimaryGeneratedColumn({ type: 'bigint' })
-  @IsOptional()
+@Entity()
+export class OrderDetail {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  order_detail_id: number;
+
+  @Column()
   order_id: number;
 
-  @IsInt()
-  @IsOptional()
-  product_detail_id: number;
+  @Column()
+  id_product: number;
 
-  @IsString()
-  @IsOptional()
+  @Column()
   name: string;
 
-  @IsString()
-  @IsOptional()
+  @Column()
   img: string;
 
-  @IsInt()
-  @IsOptional()
+  @Column()
   price: number;
 
-  @IsInt()
-  @IsOptional()
+  @Column()
   quantity: number;
 
-  @IsInt()
-  @IsOptional()
+  @Column()
   discount: number;
 
-  @IsDate()
-  @CreateDateColumn()
+  @Column({ nullable: true })
   create_date: Date;
 }
