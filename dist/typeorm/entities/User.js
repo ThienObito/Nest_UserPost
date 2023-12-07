@@ -57,7 +57,7 @@ __decorate([
     (0, typeorm_1.Column)({ default: () => 'CURRENT_TIMESTAMP' }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
-], User.prototype, "createdAt", void 0);
+], User.prototype, "create_at", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)({ name: 'users' })
 ], User);

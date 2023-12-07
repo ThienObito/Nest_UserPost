@@ -1,5 +1,7 @@
+import { OrderDetail } from './OrderDetails';
 export declare class Product {
     id: number;
+    id_product: number;
     name_product: string;
     product_information: string;
     size: string;
@@ -8,5 +10,6 @@ export declare class Product {
     price: number;
     color: string;
     quantity: number;
-    createdAt: Date;
+    created_at: Date;
+    orderdetail: OrderDetail;
 }

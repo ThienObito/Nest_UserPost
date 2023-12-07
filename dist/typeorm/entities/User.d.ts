@@ -7,5 +7,5 @@ export declare class User {
     address: string;
     dob: Date;
     sex: boolean;
-    createdAt: Date;
+    create_at: Date;
 }

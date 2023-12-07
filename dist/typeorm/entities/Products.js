@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
+const OrderDetails_1 = require("./OrderDetails");
 let Product = class Product {
 };
 __decorate([
@@ -19,6 +20,10 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], Product.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Product.prototype, "id_product", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     (0, class_validator_1.IsNotEmpty)(),
@@ -63,7 +68,12 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, typeorm_1.CreateDateColumn)({ name: 'created_at' }),
     __metadata("design:type", Date)
-], Product.prototype, "createdAt", void 0);
+], Product.prototype, "created_at", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => OrderDetails_1.OrderDetail, (orderdetail) => orderdetail.products),
+    (0, typeorm_1.JoinColumn)({ name: 'id_product' }),
+    __metadata("design:type", OrderDetails_1.OrderDetail)
+], Product.prototype, "orderdetail", void 0);
 Product = __decorate([
     (0, typeorm_1.Entity)({ name: 'products' })
 ], Product);

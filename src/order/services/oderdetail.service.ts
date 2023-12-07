@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOneOptions } from 'typeorm';
 import { OrderDetail } from 'src/typeorm/entities/OrderDetails';
 import { CreateOrderDto } from '../dtos/CreateOrder.dto';
+import { product } from 'src/typeorm/entities/category';
 
 @Injectable()
 export class OrderDetailService {
@@ -12,7 +13,10 @@ export class OrderDetailService {
   ) {}
 
   async findAll(): Promise<OrderDetail[]> {
-    return this.orderDetailRepository.find();
+    return this.orderDetailRepository.find({
+      relations: ['products'],
+    }
+   );
   }
 
   async create(createOrderDto: CreateOrderDto): Promise<OrderDetail> {
@@ -42,6 +46,7 @@ export class OrderDetailService {
   async findOne(id: number): Promise<OrderDetail | undefined> {
     return this.orderDetailRepository.findOne({
       where: { id },
+      // relations: { products: true},
     } as FindOneOptions<OrderDetail>);
   }
 

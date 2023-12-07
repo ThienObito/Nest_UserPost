@@ -1,6 +1,6 @@
 export declare class UpdateProductDto {
-    idProduct: number;
-    nameProduct: string;
+    id_product: number;
+    name_product: string;
     product_information: string;
     size: string;
     image: string;

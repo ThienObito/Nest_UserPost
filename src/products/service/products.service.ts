@@ -11,7 +11,10 @@ export class ProductService {
     private readonly productRepository: Repository<Product>,
   ) {}
   async findAll(): Promise<Product[]> {
-    return this.productRepository.find();
+    return this.productRepository.find({
+      relations: {
+          // orderdetail: true,
+      },});
   }
 
   async create(createProductDto: CreateProductDto): Promise<Product> {

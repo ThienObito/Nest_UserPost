@@ -1,6 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
+import { Product } from './Products';
 
-@Entity()
+@Entity({name:'orderdetails'})
+
 export class OrderDetail {
   @PrimaryGeneratedColumn()
   id: number;
@@ -31,4 +33,8 @@ export class OrderDetail {
 
   @Column({ nullable: true })
   create_date: Date;
+
+  @OneToMany(() => Product, (product) => product.orderdetail)
+  products: Product[];
+
 }

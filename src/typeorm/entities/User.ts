@@ -42,7 +42,7 @@ export class User {
 
   @Column({default: () => 'CURRENT_TIMESTAMP' })
   @IsOptional()
-  createdAt: Date;
+  create_at: Date;
 
 }
 

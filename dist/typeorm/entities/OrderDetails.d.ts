@@ -1,3 +1,4 @@
+import { Product } from './Products';
 export declare class OrderDetail {
     id: number;
     order_detail_id: number;
@@ -9,4 +10,5 @@ export declare class OrderDetail {
     quantity: number;
     discount: number;
     create_date: Date;
+    products: Product[];
 }

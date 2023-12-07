@@ -22,7 +22,9 @@ let ProductService = class ProductService {
         this.productRepository = productRepository;
     }
     async findAll() {
-        return this.productRepository.find();
+        return this.productRepository.find({
+            relations: {},
+        });
     }
     async create(createProductDto) {
         const product = this.productRepository.create(createProductDto);

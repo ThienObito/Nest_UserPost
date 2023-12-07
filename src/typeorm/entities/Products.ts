@@ -1,10 +1,15 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { OrderDetail } from './OrderDetails';
+
 @Entity({ name: 'products' })
 export class Product {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   @IsOptional()
-  id: number; 
+  id: number;
+
+  @Column()
+  id_product: number;
 
   @Column({ unique: true })
   @IsNotEmpty()
@@ -40,5 +45,9 @@ export class Product {
   @Column()
   @IsOptional()
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  created_at: Date; 
+
+  @ManyToOne(() => OrderDetail, (orderdetail) => orderdetail.products)
+  @JoinColumn({name:'id_product'})
+  orderdetail: OrderDetail
 }

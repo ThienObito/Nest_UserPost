@@ -22,7 +22,9 @@ let OrderDetailService = class OrderDetailService {
         this.orderDetailRepository = orderDetailRepository;
     }
     async findAll() {
-        return this.orderDetailRepository.find();
+        return this.orderDetailRepository.find({
+            relations: ['products'],
+        });
     }
     async create(createOrderDto) {
         const orderDetail = this.orderDetailRepository.create(createOrderDto);
